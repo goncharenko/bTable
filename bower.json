@@ -1,0 +1,50 @@
+{
+    "name": "btable",
+    "version": "0.0.1",
+    "authors": [
+        "goncharenko"
+    ],
+    "description": "lightweight table for angular",
+    "main": "dist/btable.js",
+    "keywords": [
+      "btable",
+      "bTable",
+      "b-table",
+      "table"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "^1.2.0"
+    },
+    "devDependencies": {
+        "jquery": "^2.0.0"
+    },
+    "overrides": {
+        "bootstrap": {
+            "main": [
+                "dist/js/bootstrap.js",
+                "dist/css/bootstrap.min.css",
+                "less/bootstrap.less"
+            ]
+        },
+        "fontawesome": {
+            "main": [
+                "css/font-awesome.css",
+                "fonts/fontawesome-webfont.eot",
+                "fonts/fontawesome-webfont.woff",
+                "fonts/fontawesome-webfont.ttf",
+                "fonts/fontawesome-webfont.svg"
+            ]
+        }
+    },
+    "resolutions": {
+        "angular": ">1.2.0"
+    }
+}
