@@ -15,9 +15,9 @@ bower install btable --save
 
 Next:
 
-    1. Add references in your code to btable.js and btable.css
+1. Add references in your code to `btable.js` and `btable.css`
 
-    2. Register module `bTable` in you application.
+2. Register module `bTable` in you application.
 
 ## Usage & Demo
 
