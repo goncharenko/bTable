@@ -27,7 +27,7 @@ Building from source
 
 ## How to build
 
-First you should install nodejs and npm, then run this command (to install all dependencies): 
+First you should install nodejs and npm, then run this command (to install all dependencies):
 
     npm install
 
