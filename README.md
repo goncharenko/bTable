@@ -41,7 +41,7 @@ Then, whenever you make any changes, get gulp to build:
 
 ##Author
 
-[Vitaly Goncharenko]
+[Vitaly Goncharenko] (https://about.me/goncharenko)
 
 ## License
 
