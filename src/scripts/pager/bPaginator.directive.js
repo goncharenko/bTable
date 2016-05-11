@@ -4,9 +4,9 @@
     .module('bTable')
     .directive('bPaginator', bPaginatorDirective);
 
-  bPaginatorDirective.$inject = ['$q'];
+  bPaginatorDirective.$inject = ['$log'];
 
-  function bPaginatorDirective($q) {
+  function bPaginatorDirective($log) {
     return {
       bindToController: true,
       controller: 'bPaginatorController',
@@ -21,6 +21,7 @@
     };
 
     function bPaginatorCompile(el, attr, transclude) {
+      $log.debug('bPaginatorCompile activated!');
       return {
         pre: bPaginatorPreLink,
         post: bPaginatorPostLink
@@ -28,11 +29,12 @@
     }
 
     function bPaginatorPreLink(scope, el, attr, ctrl) {
-      console.log('bPaginatorLink activated');
+      $log.debug('bPaginatorPreLink activated!');
       el.addClass('pagination');
     }
 
     function bPaginatorPostLink(scope, el, attr, ctrl) {
+      $log.debug('bPaginatorPostLink activated!');
       scope.range = [];
 
       scope.isNextPage = isNextPage;
@@ -54,7 +56,6 @@
         return ctrl.model.data;
       }, function(data) {
         calculateRange(data);
-        //bindData();
       }, true);
 
       function calculateRange(data) {
@@ -117,7 +118,6 @@
 
       function setPage(n) {
         pager.currentPage = n;
-        //scope.currentPage = n;
       }
     }
 

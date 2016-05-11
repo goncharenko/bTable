@@ -4,10 +4,8 @@
     .module('bTable')
     .directive('bSort', bSortDirective);
 
-  bSortDirective.$inject = ['$q', 'orderByFilter'];
-
-  function bSortDirective($q, orderByFilter) {
-    console.log('bSortDirective activated');
+  bSortDirective.$inject = ['$log', '$q', 'orderByFilter'];
+  function bSortDirective($log, $q, orderByFilter) {
     return {
       compile: bSortCompile,
       require: '^bTable',
@@ -18,13 +16,14 @@
     };
 
     function bSortCompile(el, attr, transclude) {
+      $log.debug('bSortCompile activated!');
       return {
         post: bSortLink
       };
     }
 
     function bSortLink(scope, el, attr, ctrl, transclude) {
-      console.log('bRowLink activated');
+      $log.debug('bSortLink activated!');
       var predicate = attr.bSort;
       var sorter = ctrl.model.sorter;
       scope.sort = sort;
@@ -32,9 +31,7 @@
       scope.$watch(function() {
         return ctrl.model.sorter;
       }, function(sorter) {
-        //if (sorter && sorter.isSort) {
         updateCss(scope, predicate, sorter);
-        //}
       }, true);
 
       function sort() {
@@ -63,17 +60,11 @@
           return $q.all(promises).then(function() {
             model.sorter.isSort = true;
             model.dataDsp = angular.copy(model.data);
-            // if (model.pager) {
-            //   model.pager.currentPage = 0;
-            // }
           });
         } else {
           model.data = orderByFilter(model.data,
               sorter.predicate, sorter.reverse);
           sorter.isSort = true;
-          // if (model.pager) {
-          //   model.pager.currentPage = 0;
-          // }
         }
       }
     }

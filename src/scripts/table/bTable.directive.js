@@ -3,7 +3,8 @@
      .module('bTable')
      .directive('bTable', bTableDirective);
 
-  function bTableDirective() {
+  bTableDirective.$inject = ['$log'];
+  function bTableDirective($log) {
     return {
       bindToController: true,
       controller: 'bTableController',
@@ -16,8 +17,7 @@
     };
 
     function bTableLink(scope, el, attr, ctrl) {
-      console.log('bTableLink activated');
-      //el.addClass('b-table');
+      $log.debug('bTableLink activated!');
       el.addClass('table');
       el.addClass('table-striped');
     }

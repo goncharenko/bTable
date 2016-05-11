@@ -5,11 +5,8 @@
     .module('bTable')
     .directive('bRow', bRowDirective);
 
-  bRowDirective.$inject = ['$animate'];
-
-  function bRowDirective($animate) {
-    console.log('bRowDirective activated');
-
+  bRowDirective.$inject = ['$animate', '$log'];
+  function bRowDirective($animate, $log) {
     return {
       bindToController: true,
       compile: bRowCompile,
@@ -21,12 +18,14 @@
     };
 
     function bRowCompile(el, attr, transclude) {
+      $log.debug('bRowCompile activated!');
       return {
         post: bRowLink
       };
     }
 
     function bRowLink(scope, el, attr, ctrl, transclude) {
+      $log.debug('bRowLink activated!');
       //https://github.com/angular/angular.js/blob/master/src/ng/directive/ngRepeat.js
       // Store a list of elements from previous run. This is a hash where key is the item from the
       // iterator, and the value is objects with following properties.

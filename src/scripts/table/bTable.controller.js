@@ -5,24 +5,18 @@
     .controller('bTableController', bTableController);
 
   bTableController.$inject = ['$log', '$scope', '$q', 'limitToFilter'];
-
   function bTableController($log, $scope, $q, limitToFilter) {
     var vm = this;
 
     activate();
 
     function activate() {
-      $log.debug('bTableController activated');
+      $log.debug('bTableController activated!');
 
       if (!vm.model.dataDsp) {
         var dataDsp = angular.copy(vm.model.data);
         vm.model.dataDsp = dataDsp;
       }
-      //vm.modelDsp = {
-      //  data: vm.model.data
-      //};
-      //vm.modelDsp.data = vm.model.dataDsp;
-      //vm.modelDsp = bModelService.getModel();
 
       if (!vm.model.sorter) {
         vm.model.sorter = {};

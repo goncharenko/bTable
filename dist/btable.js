@@ -73,14 +73,14 @@
     .module('bTable')
     .controller('bPaginatorController', bPaginatorController);
 
-  bPaginatorController.$inject = ['$scope'];
-
-  function bPaginatorController($scope) {
+  bPaginatorController.$inject = ['$log', '$scope'];
+  function bPaginatorController($log, $scope) {
     var vm = this;
 
     activate();
 
     function activate() {
+      $log.debug('bPaginatorController activated!');
       if (!vm.model.dataDsp) {
         var dataDsp = angular.copy(vm.model.data);
         vm.model.dataDsp = dataDsp;
@@ -102,9 +102,9 @@
     .module('bTable')
     .directive('bPaginator', bPaginatorDirective);
 
-  bPaginatorDirective.$inject = ['$q'];
+  bPaginatorDirective.$inject = ['$log'];
 
-  function bPaginatorDirective($q) {
+  function bPaginatorDirective($log) {
     return {
       bindToController: true,
       controller: 'bPaginatorController',
@@ -119,6 +119,7 @@
     };
 
     function bPaginatorCompile(el, attr, transclude) {
+      $log.debug('bPaginatorCompile activated!');
       return {
         pre: bPaginatorPreLink,
         post: bPaginatorPostLink
@@ -126,11 +127,12 @@
     }
 
     function bPaginatorPreLink(scope, el, attr, ctrl) {
-      console.log('bPaginatorLink activated');
+      $log.debug('bPaginatorPreLink activated!');
       el.addClass('pagination');
     }
 
     function bPaginatorPostLink(scope, el, attr, ctrl) {
+      $log.debug('bPaginatorPostLink activated!');
       scope.range = [];
 
       scope.isNextPage = isNextPage;
@@ -152,7 +154,6 @@
         return ctrl.model.data;
       }, function(data) {
         calculateRange(data);
-        //bindData();
       }, true);
 
       function calculateRange(data) {
@@ -215,7 +216,6 @@
 
       function setPage(n) {
         pager.currentPage = n;
-        //scope.currentPage = n;
       }
     }
 
@@ -251,11 +251,8 @@
     .module('bTable')
     .directive('bRow', bRowDirective);
 
-  bRowDirective.$inject = ['$animate'];
-
-  function bRowDirective($animate) {
-    console.log('bRowDirective activated');
-
+  bRowDirective.$inject = ['$animate', '$log'];
+  function bRowDirective($animate, $log) {
     return {
       bindToController: true,
       compile: bRowCompile,
@@ -267,12 +264,14 @@
     };
 
     function bRowCompile(el, attr, transclude) {
+      $log.debug('bRowCompile activated!');
       return {
         post: bRowLink
       };
     }
 
     function bRowLink(scope, el, attr, ctrl, transclude) {
+      $log.debug('bRowLink activated!');
       //https://github.com/angular/angular.js/blob/master/src/ng/directive/ngRepeat.js
       // Store a list of elements from previous run. This is a hash where key is the item from the
       // iterator, and the value is objects with following properties.
@@ -475,9 +474,8 @@
     .module('bTable')
     .directive('bRowExpanded', bRowExpandedDirective);
 
-  bRowExpandedDirective.$inject = ['$animate'];
-
-  function bRowExpandedDirective($animate) {
+  bRowExpandedDirective.$inject = ['$animate', '$log'];
+  function bRowExpandedDirective($animate, $log) {
     return {
       compile: bRowExpandedCompile,
       restrict: 'AE',
@@ -486,12 +484,14 @@
     };
 
     function bRowExpandedCompile(el, attr, transclude) {
+      $log.debug('bRowExpandedCompile activated!');
       return {
         post: bRowExpandedLink
       };
     }
 
     function bRowExpandedLink(scope, el, attr, ctrl, transclude) {
+      $log.debug('bRowExpandedLink activated!');
       // https://github.com/angular/angular.js/blob/master/src/ng/directive/ngIf.js
       var block;
       var childScope;
@@ -557,7 +557,8 @@
     .module('bTable')
     .directive('bRowToggle', bRowToggleDirective);
 
-  function bRowToggleDirective() {
+  bRowToggleDirective.$inject = ['$log'];
+  function bRowToggleDirective($log) {
     return {
       compile: bRowToggleCompile,
       restrict: 'AE',
@@ -566,6 +567,7 @@
     };
 
     function bRowToggleCompile(el, attr) {
+      $log.debug('bRowToggleCompile activated!');
       return {
         post: bRowToggleLink
       };
@@ -574,24 +576,15 @@
     var isToggle = false;
 
     function bRowToggleLink(scope, el, attr) {
-      console.log('bRowToggleLink activated');
-      //scope.cssClass = 'fa-angle-right';
+      $log.debug('bRowToggleLink activated!');
       scope.toggle = toggle;
 
       function toggle() {
         if (scope.row.expanded) {
-          //isToggle = false;
-          //scope.cssClass = 'fa-angle-right';
           scope.row.expanded = false;
         } else {
-          //isToggle = true;
-          //scope.cssClass = 'fa-angle-down';
           scope.row.expanded = true;
         }
-
-        //if (scope.row && scope.row.data) {
-        //  scope.row.expanded = isToggle;
-        //}
       }
     }
 
@@ -626,11 +619,6 @@
     function getTemplate(element, attrs) {
       var template = '';
 
-      //template += '<a ng-click="vm.onClick()">\
-      //                <i class="fa fa-filter" ng-if="vm.showFilter()"></i>\
-      //                <span ng-transclude></span>\
-      //                <i class="fa" ng-class="{\'fa-chevron-up\' : vm.sortOrder === vm.sortBy && !vm.sortReverse,  \'fa-chevron-down\' : vm.sortOrder===vm.sortBy && vm.sortReverse}"></i>\
-      //            </a>';
       template += '<span ng-transclude></span>';
 
       return template;
@@ -644,10 +632,8 @@
     .module('bTable')
     .directive('bSort', bSortDirective);
 
-  bSortDirective.$inject = ['$q', 'orderByFilter'];
-
-  function bSortDirective($q, orderByFilter) {
-    console.log('bSortDirective activated');
+  bSortDirective.$inject = ['$log', '$q', 'orderByFilter'];
+  function bSortDirective($log, $q, orderByFilter) {
     return {
       compile: bSortCompile,
       require: '^bTable',
@@ -658,13 +644,14 @@
     };
 
     function bSortCompile(el, attr, transclude) {
+      $log.debug('bSortCompile activated!');
       return {
         post: bSortLink
       };
     }
 
     function bSortLink(scope, el, attr, ctrl, transclude) {
-      console.log('bRowLink activated');
+      $log.debug('bSortLink activated!');
       var predicate = attr.bSort;
       var sorter = ctrl.model.sorter;
       scope.sort = sort;
@@ -672,9 +659,7 @@
       scope.$watch(function() {
         return ctrl.model.sorter;
       }, function(sorter) {
-        //if (sorter && sorter.isSort) {
         updateCss(scope, predicate, sorter);
-        //}
       }, true);
 
       function sort() {
@@ -703,17 +688,11 @@
           return $q.all(promises).then(function() {
             model.sorter.isSort = true;
             model.dataDsp = angular.copy(model.data);
-            // if (model.pager) {
-            //   model.pager.currentPage = 0;
-            // }
           });
         } else {
           model.data = orderByFilter(model.data,
               sorter.predicate, sorter.reverse);
           sorter.isSort = true;
-          // if (model.pager) {
-          //   model.pager.currentPage = 0;
-          // }
         }
       }
     }
@@ -750,24 +729,18 @@
     .controller('bTableController', bTableController);
 
   bTableController.$inject = ['$log', '$scope', '$q', 'limitToFilter'];
-
   function bTableController($log, $scope, $q, limitToFilter) {
     var vm = this;
 
     activate();
 
     function activate() {
-      $log.debug('bTableController activated');
+      $log.debug('bTableController activated!');
 
       if (!vm.model.dataDsp) {
         var dataDsp = angular.copy(vm.model.data);
         vm.model.dataDsp = dataDsp;
       }
-      //vm.modelDsp = {
-      //  data: vm.model.data
-      //};
-      //vm.modelDsp.data = vm.model.dataDsp;
-      //vm.modelDsp = bModelService.getModel();
 
       if (!vm.model.sorter) {
         vm.model.sorter = {};
@@ -830,7 +803,8 @@
      .module('bTable')
      .directive('bTable', bTableDirective);
 
-  function bTableDirective() {
+  bTableDirective.$inject = ['$log'];
+  function bTableDirective($log) {
     return {
       bindToController: true,
       controller: 'bTableController',
@@ -843,8 +817,7 @@
     };
 
     function bTableLink(scope, el, attr, ctrl) {
-      console.log('bTableLink activated');
-      //el.addClass('b-table');
+      $log.debug('bTableLink activated!');
       el.addClass('table');
       el.addClass('table-striped');
     }

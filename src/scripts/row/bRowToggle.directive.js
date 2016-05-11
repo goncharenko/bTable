@@ -3,7 +3,8 @@
     .module('bTable')
     .directive('bRowToggle', bRowToggleDirective);
 
-  function bRowToggleDirective() {
+  bRowToggleDirective.$inject = ['$log'];
+  function bRowToggleDirective($log) {
     return {
       compile: bRowToggleCompile,
       restrict: 'AE',
@@ -12,6 +13,7 @@
     };
 
     function bRowToggleCompile(el, attr) {
+      $log.debug('bRowToggleCompile activated!');
       return {
         post: bRowToggleLink
       };
@@ -20,24 +22,15 @@
     var isToggle = false;
 
     function bRowToggleLink(scope, el, attr) {
-      console.log('bRowToggleLink activated');
-      //scope.cssClass = 'fa-angle-right';
+      $log.debug('bRowToggleLink activated!');
       scope.toggle = toggle;
 
       function toggle() {
         if (scope.row.expanded) {
-          //isToggle = false;
-          //scope.cssClass = 'fa-angle-right';
           scope.row.expanded = false;
         } else {
-          //isToggle = true;
-          //scope.cssClass = 'fa-angle-down';
           scope.row.expanded = true;
         }
-
-        //if (scope.row && scope.row.data) {
-        //  scope.row.expanded = isToggle;
-        //}
       }
     }
 

@@ -3,9 +3,8 @@
     .module('bTable')
     .directive('bRowExpanded', bRowExpandedDirective);
 
-  bRowExpandedDirective.$inject = ['$animate'];
-
-  function bRowExpandedDirective($animate) {
+  bRowExpandedDirective.$inject = ['$animate', '$log'];
+  function bRowExpandedDirective($animate, $log) {
     return {
       compile: bRowExpandedCompile,
       restrict: 'AE',
@@ -14,12 +13,14 @@
     };
 
     function bRowExpandedCompile(el, attr, transclude) {
+      $log.debug('bRowExpandedCompile activated!');
       return {
         post: bRowExpandedLink
       };
     }
 
     function bRowExpandedLink(scope, el, attr, ctrl, transclude) {
+      $log.debug('bRowExpandedLink activated!');
       // https://github.com/angular/angular.js/blob/master/src/ng/directive/ngIf.js
       var block;
       var childScope;
