@@ -1,4 +1,6 @@
 (function() {
+  'use strict';
+  
   var NG_REMOVED = '$$NG_REMOVED';
 
   angular

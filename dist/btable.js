@@ -7,36 +7,6 @@
 (function() {
   'use strict';
 
-  angular.module('bTable')
-     .config(configure);
-
-  configure.$inject = [
-        '$logProvider'];
-
-  function configure($logProvider) {
-
-    configureLogging();
-    //configureExceptions();
-
-    function configureLogging() {
-      // turn debugging off/on (no info or warn)
-      if ($logProvider.debugEnabled) {
-        $logProvider.debugEnabled(false);
-      }
-    }
-
-    // function configureExceptions() {
-    //   exceptionConfigProvider.config.appErrorPrefix = config.appErrorPrefix;
-    // }
-  }
-})();
-
-(function() {
-  'use strict';
-
-  angular.module('bTable')
-     .constant('config', config);
-
   var events = {
     controllerActivateSuccess: 'controller.activateSuccess',
   };
@@ -63,17 +33,44 @@
     appErrorPrefix: '[bTable Error]',
     events: events,
     keyCodes: keyCodes,
-    version: '0.0.1'
+    version: '0.0.3'
   };
+
+  angular
+    .module('bTable')
+    .constant('config', config);
 })();
 
 (function() {
+  'use strict';
+
+  angular
+    .module('bTable')
+    .config(configure);
+
+  configure.$inject = ['$logProvider'];
+  function configure($logProvider) {
+
+    configureLogging();
+
+    function configureLogging() {
+      // turn debugging off/on (no info or warn)
+      if ($logProvider.debugEnabled) {
+        $logProvider.debugEnabled(false);
+      }
+    }
+  }
+})();
+
+(function() {
+  'use strict';
 
   angular
     .module('bTable')
     .controller('bPaginatorController', bPaginatorController);
 
   bPaginatorController.$inject = ['$log', '$scope'];
+
   function bPaginatorController($log, $scope) {
     var vm = this;
 
@@ -97,7 +94,8 @@
 })();
 
 (function() {
-
+  'use strict';
+  
   angular
     .module('bTable')
     .directive('bPaginator', bPaginatorDirective);
@@ -245,6 +243,8 @@
 })();
 
 (function() {
+  'use strict';
+  
   var NG_REMOVED = '$$NG_REMOVED';
 
   angular
@@ -470,6 +470,8 @@
 })();
 
 (function() {
+  'use strict';
+  
   angular
     .module('bTable')
     .directive('bRowExpanded', bRowExpandedDirective);
@@ -553,6 +555,8 @@
 })();
 
 (function() {
+  'use strict';
+  
   angular
     .module('bTable')
     .directive('bRowToggle', bRowToggleDirective);
@@ -602,6 +606,8 @@
 })();
 
 (function() {
+  'use strict';
+  
   angular
     .module('bTable')
     .directive('bSearch', bSearchDirective);
@@ -627,7 +633,8 @@
 })();
 
 (function() {
-
+  'use strict';
+  
   angular
     .module('bTable')
     .directive('bSort', bSortDirective);
@@ -723,7 +730,8 @@
 })();
 
 (function() {
-
+  'use strict';
+  
   angular
     .module('bTable')
     .controller('bTableController', bTableController);
@@ -799,6 +807,8 @@
 })();
 
 (function() {
+  'use strict';
+  
   angular
      .module('bTable')
      .directive('bTable', bTableDirective);

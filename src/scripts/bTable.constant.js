@@ -1,9 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('bTable')
-     .constant('config', config);
-
   var events = {
     controllerActivateSuccess: 'controller.activateSuccess',
   };
@@ -30,6 +27,10 @@
     appErrorPrefix: '[bTable Error]',
     events: events,
     keyCodes: keyCodes,
-    version: '0.0.1'
+    version: '0.0.3'
   };
+
+  angular
+    .module('bTable')
+    .constant('config', config);
 })();

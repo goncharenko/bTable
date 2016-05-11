@@ -1,6 +1,6 @@
 {
   "name": "btable",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "lightweight table for angular",
   "main": "index.js",
   "author": "goncharenko",
