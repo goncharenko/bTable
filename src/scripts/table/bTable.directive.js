@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  
+
   angular
      .module('bTable')
      .directive('bTable', bTableDirective);

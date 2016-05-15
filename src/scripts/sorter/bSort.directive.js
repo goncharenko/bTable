@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  
+
   angular
     .module('bTable')
     .directive('bSort', bSortDirective);
@@ -74,7 +74,7 @@
       var template = '';
 
       template +=
-        '<span class="hand" ng-click="sort()">' +
+        '<span class="b-hand" ng-click="sort()">' +
         '<span ng-transclude></span>' +
         '<i class="fa {{cssClass}}" style="padding-left: 5px;"></i></span>';
 

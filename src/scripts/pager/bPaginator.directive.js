@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  
+
   angular
     .module('bTable')
     .directive('bPaginator', bPaginatorDirective);
@@ -126,7 +126,7 @@
       var template = '';
 
       template +=
-        '<ul class="pull-right" ng-if="range.length > 0">' +
+        '<ul ng-if="range.length > 0">' +
         '<li class="padded-r" ng-class="isPrevPage()">' +
         '<a href="javascript:void(0)" ng-click="prevPage()">' +
         '<i class="fa fa-chevron-left"></i></a>' +
