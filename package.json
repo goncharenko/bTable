@@ -18,6 +18,5 @@
     "gulp-print": "2.0.1",
     "gulp-uglify": "1.5.3",
     "gulp-util": "3.0.7"
-  },
-  "private": true
+  }
 }
