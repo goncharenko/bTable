@@ -35,11 +35,11 @@ Next, use bower to get the JS libraries needed:
 
     node_modules/.bin/bower install
 
-Then, whenever you make any changes, get gulp to build:
+Then, when you make any changes, run gulp to build:
 
     node_modules/.bin/gulp
 
-##Author
+## Author 
 
 [Vitaly Goncharenko] (https://about.me/goncharenko)
 
